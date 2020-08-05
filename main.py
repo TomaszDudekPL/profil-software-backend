@@ -1,6 +1,7 @@
 import json
 import re
 from birthday import birthday
+from db import run_database
 
 
 def read_file(url_to_file):
@@ -26,3 +27,4 @@ def prepare_data_for_database(obj):
 arr = []
 if __name__ == '__main__':
     arr = prepare_data_for_database(read_file('persons.json'))
+    run_database(arr)
