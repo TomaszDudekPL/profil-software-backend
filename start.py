@@ -94,7 +94,7 @@ def start(gender, average_age, popular_cities, popular_passwords, born):
     if popular_passwords:
         pop_pass(popular_passwords)
 
-    if dob:
+    if born:
         users_born_dates(born)
 
 
