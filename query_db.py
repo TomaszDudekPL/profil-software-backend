@@ -6,8 +6,8 @@ number_of_male = 'SELECT "gender" FROM persons WHERE "gender"="male"'
 average_of_age_all = 'SELECT "dob.age" FROM persons'
 average_of_age_female = 'SELECT "dob.age" FROM persons WHERE "gender"="female"'
 average_of_age_male = 'SELECT "dob.age" FROM persons WHERE "gender"="male"'
-popularity_of_cities = 'SELECT "location.city", COUNT(*) AS "location.city" FROM persons GROUP BY "location.city" ORDER BY COUNT(*) DESC LIMIT {}'
-popularity_of_passwords = 'SELECT "login.password", COUNT(*) AS "login.password" FROM persons GROUP BY "login.password" ORDER BY COUNT(*) DESC LIMIT {}'
+popularity_of_cities = 'SELECT "location.city", COUNT(*) AS "location.city" FROM persons GROUP BY "location.city" ORDER BY COUNT(*) DESC LIMIT "{}"'
+popularity_of_passwords = 'SELECT "login.password", COUNT(*) AS "login.password" FROM persons GROUP BY "login.password" ORDER BY COUNT(*) DESC LIMIT "{}"'
 date_of_birth = 'SELECT "name.first", "name.last", "dob.date" FROM persons WHERE "dob.date" BETWEEN "{}" and "{}" ORDER BY "dob.date" DESC'
 
 
