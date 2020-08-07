@@ -7,7 +7,7 @@ from program import *
 @click.option('--average_age', help='Average of age. Commands: all, male, female.')
 @click.option('--popular_cities', help='The number of most popular cities. Commands: any number.')
 @click.option('--popular_passwords', help='The number of most popular passwords. Commands: any number.')
-@click.option('--born', multiple=True, help='Users born in between dates. Commands must be from older to newer: --born 1983-MM-DD --born 2015-MM-DD.')
+@click.option('--born', multiple=True, help='Users born in between dates. Commands must be from older to newer: --born 1944-MM-DD --born 1998-MM-DD.')
 @click.option('--psf', help='"Password-Security-Factor". PSF show the factor of good/bad passwords. The higher score the better. Commands: any number from 1 to 12.')
 def start(gender, average_age, popular_cities, popular_passwords, born, psf):
 
