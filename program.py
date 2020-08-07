@@ -45,7 +45,7 @@ def pop_cities(num):
 
 
 def pop_pass(num):
-    result = passwords(num)
+    result = passwords_popularity(num)
     for password in result:
         print('Frequency in db: ', password[1], '-->', password[0])
 
@@ -58,3 +58,43 @@ def users_born_dates(params):
         print('No Results for these range od dates. Remember that range must start with older date.')
     for user in result:
         print('First Name: ', user[0], 'Last Name: ', user[1], 'Date: ', user[2])
+
+
+def password_security_factor(psf_str):
+    result = passwords()
+    psf_obj = {}
+
+    for password in result:
+        # 1. Estimate "Password-Security-Factor" for each password in database.
+        psf = 0
+        if any(c.islower() for c in password[0]):
+            psf += 1
+        if any(c.isupper() for c in password[0]):
+            psf += 2
+        if any(char.isdigit() for char in password[0]):
+            psf += 1
+        if len(password[0]) >= 8:
+            psf += 5
+        if any(not c.isalnum() for c in password[0]):
+            psf += 3
+
+        # 2. Create dict with "Password-Security-Factor" and corresponding to them lists of passwords.
+        if str(psf) in psf_obj:
+            psf_obj[str(psf)].append(password[0])
+
+        else:
+            psf_obj[str(psf)] = []
+            psf_obj[str(psf)].append(password[0])
+
+    # 3. Presentation of results.
+    result_list = [*psf_obj]
+    result_list.sort()
+
+    if psf_str in psf_obj:
+        print('\nRESULTS:\n')
+        print(psf_obj[psf_str])
+        print('\nAvailable "Password-Security-Factor" for current database: ', result_list, '\n')
+
+    else:
+        print('\nFor this PSF number there is NO RESULTS.')
+        print('\nAvailable "Password-Security-Factor" for current database: ', result_list)

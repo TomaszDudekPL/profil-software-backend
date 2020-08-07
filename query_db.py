@@ -9,6 +9,7 @@ average_of_age_male = 'SELECT "dob.age" FROM persons WHERE "gender"="male"'
 popularity_of_cities = 'SELECT "location.city", COUNT(*) AS "location.city" FROM persons GROUP BY "location.city" ORDER BY COUNT(*) DESC LIMIT "{}"'
 popularity_of_passwords = 'SELECT "login.password", COUNT(*) AS "login.password" FROM persons GROUP BY "login.password" ORDER BY COUNT(*) DESC LIMIT "{}"'
 date_of_birth = 'SELECT "name.first", "name.last", "dob.date" FROM persons WHERE "dob.date" BETWEEN "{}" and "{}" ORDER BY "dob.date" DESC'
+all_passwords = 'SELECT "login.password" FROM persons'
 
 
 def num_of_people():
@@ -46,11 +47,16 @@ def cities(param):
     return res
 
 
-def passwords(param):
+def passwords_popularity(param):
     res = query_db(popularity_of_passwords.format(param))
     return res
 
 
 def dob(start, end):
     res = query_db(date_of_birth.format(start, end))
+    return res
+
+
+def passwords():
+    res = query_db(all_passwords)
     return res
