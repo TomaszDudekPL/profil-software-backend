@@ -1,4 +1,3 @@
-from query_db import *
 from birthday import clean_date_str
 from datetime import datetime
 
@@ -17,31 +16,30 @@ def get_current_date():
     return str(current_year) + "-" + str(current_month) + "-" + str(current_day)
 
 
-def percentage_of_gender(gender):
+def percentage_of_gender(gender, db_female, db_male, db_people):
 
-    fem = num_of_female()
-    male = num_of_male()
-    both = num_of_people()
+    fem = db_female()
+    male = db_male()
+    both = db_people()
 
     if gender == 'all':
         if male != 0 or fem != 0:
             per_female = (fem * 100) / both
             per_male = (male * 100) / both
-            print('female: ' + str(per_female) + '%')
-            print('male: ' + str(per_male) + '%')
+            return 'female: {} %\nmale: {} %'.format(str(per_female), str(per_male))
 
     if gender == 'male':
         if male != 0:
             per_male = (male * 100) / both
-            print('male: ' + str(per_male) + '%')
+            return 'male: {} %'.format(str(per_male))
 
     if gender == 'female':
         if fem != 0:
             per_female = (fem * 100) / both
-            print('female: ' + str(per_female) + '%')
+            return 'female: {} %'.format(str(per_female))
 
 
-def av_age(average_age):
+def av_age(average_age, db_age_all=None, db_age_female=None, db_age_male=None):
 
     def get_result(msg, cb):
         sum_of_ages = 0
@@ -53,56 +51,65 @@ def av_age(average_age):
                 sum_of_ages += elem[0]
 
             average = int(sum_of_ages / num_of_all)
-            print(msg, average)
+            return msg + str(average)
         else:
-            print('NO RESULTS IN DATABASE')
+            return 'NO RESULTS IN DATABASE'
 
     if average_age == 'all':
-        get_result('Average of age for both gender: ', av_of_age_all)
+        return get_result('Average of age for both gender: ', db_age_all)
 
     if average_age == 'female':
-        get_result('Average of age for female: ', av_of_age_female)
+        return get_result('Average of age for female: ', db_age_female)
 
     if average_age == 'male':
-        get_result('Average of age for male: ', av_of_age_male)
+        return get_result('Average of age for male: ', db_age_male)
 
 
-def pop_cities(num):
-    result = cities(num)
+def pop_cities(num, db_cities):
+    result = db_cities(num)
+    str_result = ''
     if result:
         for city in result:
-            print('Frequency in db: ', city[1], '-->', city[0])
+            str_result += 'Frequency in db: {} --> {}\n'.format(city[1], city[0])
     else:
-        print('NO RESULTS IN DATABASE')
+        return 'NO RESULTS IN DATABASE'
+
+    return str_result
 
 
-def pop_pass(num):
-    result = passwords_popularity(num)
+def pop_pass(num, db_pass_pop):
+    result = db_pass_pop(num)
+    str_result = ''
     if result:
         for password in result:
-            print('Frequency in db: ', password[1], '-->', password[0])
+            str_result += 'Frequency in db: {} --> {}\n'.format(password[1], password[0])
     else:
-        print('NO RESULTS IN DATABASE')
+        return 'NO RESULTS IN DATABASE'
+
+    return str_result
 
 
-def users_born_dates(params):
+def users_born_dates(params, db_dob):
     my_params = ['', get_current_date()]
 
     for i in range(len(params)):
         my_params[i] = params[i]
 
-    result = dob(my_params[0], my_params[1])
+    result = db_dob(my_params[0], my_params[1])
+    str_result = ''
 
     if result:
-        print('\nUsers born between: ', my_params[0], 'and', my_params[1], '\n')
+        str_result += '\nUsers born between: {} and {}\n\n'.format(my_params[0], my_params[1])
         for user in result:
-            print(clean_date_str(user[2]), user[0], user[1])
+            str_result += clean_date_str(user[2]) + ' ' + user[0] + ' ' + user[1] + '\n'
     else:
-        print('\nNo Results for these range od dates. Remember that range must start with older date.')
+        return '\nNo Results for these range od dates. Remember that range must start with older date.'
+
+    return str_result
 
 
-def password_security_factor(psf_str):
-    result = passwords()
+def password_security_factor(psf_str, db_pass_all):
+    result = db_pass_all()
     psf_obj = {}
 
     if result:
@@ -134,12 +141,13 @@ def password_security_factor(psf_str):
     # 3. Presentation of results.
     result_list = [*psf_obj]
     result_list.sort()
+    str_result = '\nRESULTS:\n\n'
 
     if psf_str in psf_obj:
-        print('\nRESULTS:\n')
-        print(psf_obj[psf_str])
-        print('\nAvailable "Password-Security-Factor" for current database: ', result_list, '\n')
+        str_result += str(psf_obj[psf_str])
+        str_result += '\n\nAvailable "Password-Security-Factor" for current database: {}\n'.format(result_list)
 
     else:
-        print('\nFor this PSF number there is NO RESULTS.')
-        print('\nAvailable "Password-Security-Factor" for current database: ', result_list)
+        return '\nFor this PSF number there is NO RESULTS.\nAvailable "Password-Security-Factor" for current database: {}'.format(result_list)
+
+    return str_result

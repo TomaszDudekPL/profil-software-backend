@@ -12,51 +12,51 @@ date_of_birth = 'SELECT "name.first", "name.last", "dob.date" FROM persons WHERE
 all_passwords = 'SELECT "login.password" FROM persons'
 
 
-def num_of_people():
+def db_people():
     res = query_db(number_of_people)
     return len(res)
 
 
-def num_of_female():
+def db_female():
     res = query_db(number_of_female)
     return len(res)
 
 
-def num_of_male():
+def db_male():
     res = query_db(number_of_male)
     return len(res)
 
 
-def av_of_age_all():
+def db_age_all():
     res = query_db(average_of_age_all)
     return res
 
 
-def av_of_age_female():
+def db_age_female():
     res = query_db(average_of_age_female)
     return res
 
 
-def av_of_age_male():
+def db_age_male():
     res = query_db(average_of_age_male)
     return res
 
 
-def cities(param):
+def db_cities(param):
     res = query_db(popularity_of_cities.format(param))
     return res
 
 
-def passwords_popularity(param):
+def db_pass_pop(param):
     res = query_db(popularity_of_passwords.format(param))
     return res
 
 
-def dob(start, end):
+def db_dob(start, end):
     res = query_db(date_of_birth.format(start, end))
     return res
 
 
-def passwords():
+def db_pass_all():
     res = query_db(all_passwords)
     return res
