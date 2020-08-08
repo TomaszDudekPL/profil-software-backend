@@ -1,5 +1,20 @@
 from query_db import *
 from birthday import clean_date_str
+from datetime import datetime
+
+
+def get_current_date():
+
+    current_day = datetime.now().day
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+
+    if current_month < 10:
+        current_month = '0' + str(current_month)
+    if current_day < 10:
+        current_day = '0' + str(current_day)
+
+    return str(current_year) + "-" + str(current_month) + "-" + str(current_day)
 
 
 def percentage_of_gender(gender):
@@ -71,7 +86,7 @@ def pop_pass(num):
 
 
 def users_born_dates(params):
-    my_params = ['', '1998-09-12']
+    my_params = ['', get_current_date()]
 
     for i in range(len(params)):
         my_params[i] = params[i]
