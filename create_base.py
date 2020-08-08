@@ -1,12 +1,14 @@
-import json
+import requests
 import re
 from birthday import birthday
 from db import run_database
 
 
-def read_file(url_to_file):
-    file = open(url_to_file, encoding='utf-8')
-    return json.load(file)
+def request_for_data(url):
+    res = requests.get(url)
+    print(res.status_code)
+    data = res.json()
+    return data
 
 
 def clean_phone_str(phone_str):
@@ -26,5 +28,5 @@ def prepare_data_for_database(obj):
 
 arr = []
 if __name__ == '__main__':
-    arr = prepare_data_for_database(read_file('persons.json'))
+    arr = prepare_data_for_database(request_for_data('https://randomuser.me/api/?results=1000'))
     run_database(arr)
