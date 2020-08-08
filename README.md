@@ -16,6 +16,10 @@ Library: "Click" [Link to documentation](https://click.palletsprojects.com/en/7.
 
 ```pip install click```
 
+Library: "Requests" [Link to documentation](https://requests.readthedocs.io/en/master/)
+
+```pip install requests==2.7.0```
+
 Library "py.test" [Link to documentation](https://docs.pytest.org/en/latest/contents.html)
 
 ```pip install -U pytest```
