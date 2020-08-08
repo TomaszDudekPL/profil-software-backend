@@ -16,6 +16,10 @@ Library: "Click" [Link to documentation](https://click.palletsprojects.com/en/7.
 
 ```pip install click```
 
+Library "py.test" [Link to documentation](https://docs.pytest.org/en/latest/contents.html)
+
+```pip install -U pytest```
+
 ### When dependencies are ready:
 
 1. Create database (from file persons.json)
@@ -32,11 +36,11 @@ Library: "Click" [Link to documentation](https://click.palletsprojects.com/en/7.
     
         --gender             Percentage of gender. Commands: all, male, female.
   
-        --average_age        Average of age. Commands: all, male, female.
+        --age                Average of age. Commands: all, male, female.
         
-        --popular_cities     The number of most popular cities. Commands: any number.
+        --cities             The number of most popular cities. Commands: any number.
         
-        --popular_passwords  The number of most popular passwords. Commands: any number.
+        --passwords          The number of most popular passwords. Commands: any number.
         
         --born               Users born in between dates. Commands must be from older to newer: --born 1944-MM-DD --born 1998-MM-DD.
                              One parameter is possible then you can see records from your argument to the 1998-09-12 (the last date in current base).
@@ -45,5 +49,11 @@ Library: "Click" [Link to documentation](https://click.palletsprojects.com/en/7.
         
         --help               Show all available options.
 
+
+### For testing:
+
+Just use command: ```pytest -v``` for all tests.
+
+If you want to run only some part of tests choose one from above options. For example: ```pytest -v -k gender```
 
  
