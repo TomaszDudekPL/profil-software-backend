@@ -8,6 +8,10 @@ According to the requirements of the task : [Link to task](https://git.profil-so
 
 Clone project and install required dependencies:
 
+Library: "Setuptools" [Link to official site](https://packaging.python.org/tutorials/installing-packages/)
+
+```pip install setuptools```
+
 Library: "Click" [Link to documentation](https://click.palletsprojects.com/en/7.x/)
 
 ```pip install click```
